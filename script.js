@@ -242,7 +242,7 @@ function updateTotalCost() {
     if (discountApplied) {
         totalCost *= 0.7;
     }
-    document.querySelector('.pay h2').textContent = `Total Cost: ₹${totalCost.toFixed(2)}`;
+    document.querySelector('.pay h2').textContent = `Total Cost: ₹${totalCost.toFixed(2)/2}`;
 }
 
 
