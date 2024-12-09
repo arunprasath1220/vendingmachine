@@ -33,7 +33,6 @@ document.querySelectorAll('.btn').forEach(button => {
             selectedItems.push({ product, quantity });
             updateTotalCost();
             updateItemCount();
-            alert(`Added ${quantity} of ${product.name}`);
         } else {
             alert('Invalid quantity');
         }
@@ -207,3 +206,48 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 });
+                      
+document.querySelectorAll('.btn').forEach(button => {
+    button.addEventListener('click', function () {
+        const parentDiv = this.parentElement;
+        const productId = parentDiv.querySelector('.name').textContent.split(':')[0].trim();
+        const quantity = parseInt(parentDiv.querySelector('.no1').value);
+        const product = products.find(p => p.id === productId);
+        
+        if (quantity > 0 && quantity <= product.stock) {
+            product.stock -= quantity;
+            selectedItems.push({ product, quantity });
+            updateTotalCost();
+            updateItemCount();
+            alert(`Added ${quantity} of ${product.name}`);
+            addPurchasedItemToList(product, quantity); // Call to add the purchased item
+        } else {
+            alert('Invalid quantity');
+        }
+    });
+});
+
+// Function to add purchased items to the "Purchased Items" list
+function addPurchasedItemToList(product, quantity) {
+    const purchasedItemsContainer = document.getElementById('purchased-items');
+    
+    const purchasedItemText = `${quantity} x ${product.name}`;
+    
+    const purchasedItem = document.createElement('p');
+    purchasedItem.textContent = purchasedItemText;
+    
+    purchasedItemsContainer.appendChild(purchasedItem);
+}
+
+function updateTotalCost() {
+    totalCost = selectedItems.reduce((acc, item) => acc + (item.product.price * item.quantity), 0);
+    if (discountApplied) {
+        totalCost *= 0.7;
+    }
+    document.querySelector('.pay h2').textContent = `Total Cost: ₹${totalCost.toFixed(2)}`;
+}
+
+function updateItemCount() {
+    const totalItems = selectedItems.reduce((acc, item) => acc + item.quantity, 0);
+    document.querySelector('#bottom h1').textContent = `Number of items: ${totalItems}`;
+}
