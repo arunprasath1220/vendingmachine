@@ -48,7 +48,8 @@ function updateTotalCost() {
 }
 
 function updateItemCount() {
-    const totalItems = selectedItems.reduce((acc, item) => acc + item.quantity, 0);
+    var totalItems = selectedItems.reduce((acc, item) => acc + item.quantity, 0);
+
     document.querySelector('#bottom h1').textContent = `Number of items: ${totalItems}`;
 }
 
@@ -217,7 +218,6 @@ document.querySelectorAll('.btn').forEach(button => {
             product.stock -= quantity;
             selectedItems.push({ product, quantity });
             updateTotalCost();
-            updateItemCount();
             alert(`Added ${quantity} of ${product.name}`);
             addPurchasedItemToList(product, quantity); 
         } else {
@@ -245,7 +245,4 @@ function updateTotalCost() {
     document.querySelector('.pay h2').textContent = `Total Cost: ₹${totalCost.toFixed(2)}`;
 }
 
-function updateItemCount() {
-    const totalItems = selectedItems.reduce((acc, item) => acc + item.quantity, 0);
-    document.querySelector('#bottom h1').textContent = `Number of items: ${totalItems}`;
-}
+
