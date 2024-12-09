@@ -104,7 +104,6 @@ exitButton.addEventListener('click', function () {
 });
 document.body.appendChild(exitButton);
 
-// stock management:
 document.addEventListener('DOMContentLoaded', () => {
     const stock = {
         a1: 15,
@@ -220,14 +219,13 @@ document.querySelectorAll('.btn').forEach(button => {
             updateTotalCost();
             updateItemCount();
             alert(`Added ${quantity} of ${product.name}`);
-            addPurchasedItemToList(product, quantity); // Call to add the purchased item
+            addPurchasedItemToList(product, quantity); 
         } else {
             alert('Invalid quantity');
         }
     });
 });
 
-// Function to add purchased items to the "Purchased Items" list
 function addPurchasedItemToList(product, quantity) {
     const purchasedItemsContainer = document.getElementById('purchased-items');
     
